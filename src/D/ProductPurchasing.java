@@ -27,7 +27,7 @@ public class ProductPurchasing extends javax.swing.JFrame {
         initComponents();
         addRowToJTable();
     }
-    
+    //aa
         public class ProductPurchase{
         public int id;
         public String purchaseDate;
