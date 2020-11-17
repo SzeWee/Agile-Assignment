@@ -1,7 +1,9 @@
 package C;
 
+import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -40,7 +42,9 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
         txtQuantity = new javax.swing.JTextField();
         btnAddOrder = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMyOrder = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        lblTotalPrice = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Catalog Order");
@@ -59,13 +63,14 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
         jLabel4.setToolTipText("");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Select quantity:");
+        jLabel5.setText("Select quantity :");
         jLabel5.setToolTipText("");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Unit Price(RM) :");
+        jLabel6.setText("Unit Price (RM) :");
         jLabel6.setToolTipText("");
 
+        selectionComboBox.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         selectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rose", "Tulip", "Sunflower", "Orchid", "Daisy" }));
         selectionComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,6 +78,10 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
             }
         });
 
+        lblUnitPrice.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblUnitPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtQuantity.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtQuantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtQuantityActionPerformed(evt);
@@ -86,7 +95,7 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMyOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -102,7 +111,13 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tblMyOrder);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setText("Total Price (RM) :");
+
+        lblTotalPrice.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblTotalPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,8 +135,8 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
                                     .addComponent(txtQuantity))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel6))
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                                     .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(selectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,16 +145,21 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 609, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(360, 360, 360)
+                        .addGap(362, 362, 362)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(262, 262, 262)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(281, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(9, 9, 9)
                 .addComponent(jLabel1)
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(selectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -155,9 +175,13 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
                 .addComponent(btnAddOrder)
                 .addGap(21, 21, 21)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(lblTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,27 +211,49 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
     }//GEN-LAST:event_selectionComboBoxActionPerformed
 
     private void btnAddOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddOrderActionPerformed
-      int qtySelected;
-        
+        int qtySelected;
+
         try {
-           qtySelected = Integer.parseInt(this.txtQuantity.getText());
-           
-      }
-      catch (Exception e){
-          JOptionPane.showMessageDialog(this,"Enter a positive integer","Error",JOptionPane.ERROR_MESSAGE);
-          return;
-      }
-        
-        if (qtySelected <= 0) {
-        JOptionPane.showMessageDialog(this,"Enter a positive integer","Error",JOptionPane.ERROR_MESSAGE);
+            qtySelected = Integer.parseInt(this.txtQuantity.getText());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Enter a positive integer", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-      
-        
+
+        if (qtySelected <= 0) {
+            JOptionPane.showMessageDialog(this, "Enter a positive integer", "Error", JOptionPane.ERROR_MESSAGE);
+        } else if (lblUnitPrice.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Select an item again", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            {
+                //Many units of the same item
+                double Price = qtySelected * parseDouble(lblUnitPrice.getText());
+
+                //store entered data into String array
+                String orderData[] = {selectionComboBox.getSelectedItem().toString(), txtQuantity.getText(), lblUnitPrice.getText(), String.valueOf(Price)};
+
+                DefaultTableModel tblModel = (DefaultTableModel) tblMyOrder.getModel();
+
+                tblModel.addRow(orderData);//row added
+
+                JOptionPane.showMessageDialog(this, "Order is added.");
+
+                //clear textfield for new entry
+                txtQuantity.setText("");
+
+                double TotalPrice = 0;
+                TotalPrice = TotalPrice + Price;
+                lblTotalPrice.setText(String.valueOf(TotalPrice));
+            }
+        }
+
+
     }//GEN-LAST:event_btnAddOrderActionPerformed
-       
-        /**
-         * @param args the command line arguments
-         */
+
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -244,13 +290,15 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
     private javax.swing.JButton btnAddOrder;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblTotalPrice;
     private javax.swing.JLabel lblUnitPrice;
     private javax.swing.JComboBox<String> selectionComboBox;
+    private javax.swing.JTable tblMyOrder;
     private javax.swing.JTextField txtQuantity;
     // End of variables declaration//GEN-END:variables
 }
