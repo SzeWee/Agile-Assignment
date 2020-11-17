@@ -301,7 +301,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int response = JOptionPane.showConfirmDialog(this, "Confirm Order", "Confirmation", JOptionPane.YES_NO_OPTION);
-        if(response == JOptionPane.YES_OPTION){
+        if(response == JOptionPane.YES_OPTION){  
             if(jComboBox4.getSelectedIndex() == 2){
                 JOptionPane.showMessageDialog(this,"accessories out of stock, please select another accessories ");
             }
