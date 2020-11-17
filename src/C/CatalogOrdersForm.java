@@ -241,8 +241,8 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
 
                 //clear textfield for new entry
                 txtQuantity.setText("");
-                
-                double TotalPrice=0;
+
+                double TotalPrice = 0;
                 TotalPrice = TotalPrice + Price;
                 lblTotalPrice.setText(String.valueOf(TotalPrice));
             }
