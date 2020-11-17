@@ -320,7 +320,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        switch (jComboBox4.getSelectedIndex()) {
+        switch (jComboBox4.getSelectedIndex()) {    
             case 0:
                 jLabel15.setText("12");
                 break;
