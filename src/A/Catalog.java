@@ -5,6 +5,11 @@
  */
 package A;
 
+import java.awt.Component;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Asus
@@ -14,8 +19,12 @@ public class Catalog extends javax.swing.JFrame {
     /**
      * Creates new form Catalog
      */
+    JFrame frame;
     public Catalog() {
         initComponents();
+        String [] cols = {"ID", "Name", "Quanriry", "PerPrice", "Available"};
+        DefaultTableModel modal = new DefaultTableModel(null, cols);
+        DataTable.setModel(modal);
     }
 
     /**
@@ -27,31 +36,137 @@ public class Catalog extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtQuantity = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtPerPrice = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtAvailable = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        DataTable = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Catelog Maintenance"));
+        jPanel1.setLayout(new java.awt.GridLayout(5, 2, 10, 2));
+
+        jLabel2.setText("ID");
+        jPanel1.add(jLabel2);
+        jPanel1.add(txtID);
+
+        jLabel3.setText("Name");
+        jPanel1.add(jLabel3);
+        jPanel1.add(txtName);
+
+        jLabel4.setText("Quantity");
+        jPanel1.add(jLabel4);
+        jPanel1.add(txtQuantity);
+
+        jLabel5.setText("Per Price");
+        jPanel1.add(jLabel5);
+        jPanel1.add(txtPerPrice);
+
+        jLabel6.setText("Avaliable");
+        jLabel6.setToolTipText("");
+        jPanel1.add(jLabel6);
+        jPanel1.add(txtAvailable);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        DataTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(DataTable);
+
+        jPanel2.setLayout(new java.awt.GridLayout(1, 4, 10, 10));
+
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnAdd);
+
+        btnUpdate.setText("Update");
+        jPanel2.add(btnUpdate);
+
+        btnDelete.setText("Delete");
+        jPanel2.add(btnDelete);
+
+        btnReset.setText("Reset");
+        jPanel2.add(btnReset);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(jLabel1)
-                .addContainerGap(302, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jLabel1)
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        boolean isValid = validation();    
+        if(isValid == false){
+            return;
+        }else{
+            String ID = txtID.getText();
+            String name = txtName.getText();
+            int quantity = Integer.parseInt(txtQuantity.getText());
+            double price = Double.parseDouble(txtPerPrice.getText());
+            String available = txtAvailable.getText();
+            DefaultTableModel model = (DefaultTableModel) DataTable.getModel();
+            model.addRow(new Object[]{ID, name, quantity, price, available});
+            
+            clear();
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -89,6 +204,83 @@ public class Catalog extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTable DataTable;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtAvailable;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPerPrice;
+    private javax.swing.JTextField txtQuantity;
     // End of variables declaration//GEN-END:variables
+
+    private boolean validation() {
+        boolean isValid = true;
+        String error = "";
+        if(txtID.getText().length()<=0){
+            isValid = false;
+            error += "ID is required!\n";
+        }
+        if(txtName.getText().length()<=0){
+            isValid = false;
+            error += "Name is required!\n";
+        }
+        if(txtQuantity.getText().length() <= 0){
+            isValid = false;
+            error += "Quantity is required!\n";
+        }else{
+            try{
+                int quantity = Integer.parseInt(txtQuantity.getText());
+                if(quantity <= 0){
+                    isValid = false;
+                    error += "Quantity must bigger than 0!\n";
+                }
+            }catch(NumberFormatException ex){
+                isValid = false;
+                error += "Quantity must be an integer";
+            }
+        }
+        if(txtPerPrice.getText().length() <= 0){
+            isValid = false;
+            error += "Per Price is required!\n";
+        }else{
+            try{
+                double price = Double.parseDouble(txtPerPrice.getText());
+                if(price <= 0){
+                    isValid = false;
+                    error += "Per Price must bigger than 0!\n";
+                }
+            }catch(NumberFormatException ex){
+                isValid = false;
+                error += "Per Price must be an integer";
+            }
+        }
+        if(txtAvailable.getText().length()<=0){
+            isValid= false;
+            error += "Available is required!\n";
+        }
+        if(isValid == false){
+            JOptionPane.showMessageDialog(frame, error, "Error", JOptionPane.ERROR_MESSAGE );
+        }
+        return isValid;
+    }
+
+    private void clear() {
+        txtID.setText("") ;
+        txtName.setText("");
+        txtQuantity.setText("");
+        txtPerPrice.setText("");
+        txtAvailable.setText("");
+    }
 }
