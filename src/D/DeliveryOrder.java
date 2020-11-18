@@ -55,6 +55,7 @@ public class DeliveryOrder extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         ArrayList<DeliveryOrder1> list = ListProductPurchase();
         Object rowData[] = new Object[4];
+        jTable1.setRowHeight(40);
         for(int i=0; i<list.size(); i++){
             rowData[0] = list.get(i).paymentID;
             rowData[1] = list.get(i).customerAdress;
