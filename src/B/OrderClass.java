@@ -9,11 +9,11 @@ package B;
  *
  * @author alan0
  */
-class Order {
+class OrderClass {
     private String productName,customerName;
     private int unitPrice,quantity,totalPrice;
 
-    public Order(String productName, String customerName, int unitPrice, int quantity, int totalPrice) {
+    public OrderClass(String productName, String customerName, int unitPrice, int quantity, int totalPrice) {
         this.productName = productName;
         this.customerName = customerName;
         this.unitPrice = unitPrice;

@@ -1,11 +1,21 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * User Story : As a customer, I want to receive an order list, in order to make sure the items purchased.
  */
 package B;
 
+//import Class.printRecord;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -16,22 +26,35 @@ public class OrderList extends javax.swing.JFrame {
     /**
      * Creates new form OrderList
      */
+    int TotalPrice = 0;
+    OrderClass insertData = new OrderClass("", "", 0, 0, 0);
+    //OrderClass insertData = new OrderClass("Rose", "Lim Xiao Jie", 12, 10, 12*10);
+    //OrderClass insertData2 = new OrderClass("Sunflower", "Lim Xiao Jie", 7, 5, 7*5);
+    //Order insertData = new OrderClass("Rose", "Lim Xiao Jie", 2, 10, 20);
+    Date date = java.util.Calendar.getInstance().getTime();
+    String currentCustomerName = "";
+    
     public OrderList() {
         initComponents();
         //addRowToJTable();
     }
 
     
-    public ArrayList<Order> orderList(){
-        ArrayList<Order> orderList = new ArrayList<>();
-        Order insertData = new Order("Rose", "Lim Xiao Jie", 2, 10, 20);
+    public ArrayList<OrderClass> orderList(){
+        ArrayList<OrderClass> orderList = new ArrayList<>();
+        //Order insertData = new OrderClass("Rose", "Lim Xiao Jie", 2, 10, 20);
+        
+        currentCustomerName = insertData.getCustomerName();
+        TotalPrice = insertData.getTotalPrice(); //+ insertData2.getTotalPrice();
         orderList.add(insertData);
+        //orderList.add(insertData2);
+        lblTotalPrice.setText("Total : RM " + TotalPrice);
         return orderList;
     }
     
     public void addRowToJTable(){
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        ArrayList<Order> orderList = orderList();
+        DefaultTableModel model = (DefaultTableModel)tblOrderList.getModel();
+        ArrayList<OrderClass> orderList = orderList();
         Object rowData[] = new Object[4];
         for(int i=0; i<orderList.size(); i++){
             rowData[0] = orderList.get(i).getProductName();
@@ -39,6 +62,14 @@ public class OrderList extends javax.swing.JFrame {
             rowData[2] = orderList.get(i).getQuantity();
             rowData[3] = orderList.get(i).getTotalPrice();
             model.addRow(rowData);
+            
+            if (rowData[0] == ""){
+                lblMsg.setText("No Record");
+            }
+        }
+        String v = tblOrderList.getValueAt(1,1).toString();
+        if(v.trim().length() == 0) {
+               lblMsg.setText("No Record");
         }
     }
     
@@ -51,35 +82,50 @@ public class OrderList extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        panelOrderList = new javax.swing.JPanel();
+        lblTitle = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        lblCustomerName = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblOrderList = new javax.swing.JTable();
+        lblTotalPrice = new javax.swing.JLabel();
+        lblMsg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Order list");
         setAlwaysOnTop(true);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
-        jLabel1.setText("Order List");
-
-        jLabel2.setText("Customer Name : Lim Xiao Jie");
-
-        jLabel3.setText("14 NOV 2020");
-
-        jLabel12.setText("Total : RM 20.00");
-
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("Print");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        panelOrderList.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblTitle.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblTitle.setText("Order List");
+
+        lblCustomerName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblCustomerName.setText("Customer Name : Lim Xiao Jie");
+        lblCustomerName.setToolTipText("");
+
+        lblDate.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblDate.setText("19 NOV 2020");
+
+        tblOrderList.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tblOrderList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -102,13 +148,62 @@ public class OrderList extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        jScrollPane2.setViewportView(tblOrderList);
+        if (tblOrderList.getColumnModel().getColumnCount() > 0) {
+            tblOrderList.getColumnModel().getColumn(0).setResizable(false);
+            tblOrderList.getColumnModel().getColumn(1).setResizable(false);
+            tblOrderList.getColumnModel().getColumn(2).setResizable(false);
+            tblOrderList.getColumnModel().getColumn(3).setResizable(false);
         }
+
+        lblTotalPrice.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblTotalPrice.setText("Total : N/A");
+
+        javax.swing.GroupLayout panelOrderListLayout = new javax.swing.GroupLayout(panelOrderList);
+        panelOrderList.setLayout(panelOrderListLayout);
+        panelOrderListLayout.setHorizontalGroup(
+            panelOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOrderListLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelOrderListLayout.createSequentialGroup()
+                        .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(173, 173, 173))
+                    .addGroup(panelOrderListLayout.createSequentialGroup()
+                        .addComponent(jSeparator1)
+                        .addContainerGap())
+                    .addGroup(panelOrderListLayout.createSequentialGroup()
+                        .addComponent(lblCustomerName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblDate)
+                        .addContainerGap())
+                    .addGroup(panelOrderListLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelOrderListLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTotalPrice)
+                .addContainerGap())
+        );
+        panelOrderListLayout.setVerticalGroup(
+            panelOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOrderListLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTitle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelOrderListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCustomerName)
+                    .addComponent(lblDate))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblTotalPrice)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        lblMsg.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,41 +211,21 @@ public class OrderList extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addComponent(jScrollPane2))
+                .addComponent(lblMsg)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
                 .addContainerGap())
+            .addComponent(panelOrderList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12)
+                .addComponent(panelOrderList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(7, 7, 7))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(lblMsg))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -158,7 +233,14 @@ public class OrderList extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         addRowToJTable();
+        lblDate.setText(date.toString());
+        lblCustomerName.setText(lblCustomerName.getText() + currentCustomerName);
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        printRecord(panelOrderList);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,15 +276,61 @@ public class OrderList extends javax.swing.JFrame {
             }
         });
     }
+    
+    // Method For To Print Panel Contents
+    private void printRecord(JPanel panel){
+        // Create PrinterJob Here
+        PrinterJob printerJob = PrinterJob.getPrinterJob();
+        // Set Printer Job Name
+        printerJob.setJobName("Print Record");
+        // Set Printable
+        printerJob.setPrintable(new Printable() {
+            @Override
+            public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+                // Check If No Printable Content
+                if(pageIndex > 0){
+                    return Printable.NO_SUCH_PAGE;
+                }
+                
+                // Make 2D Graphics to map content
+                Graphics2D graphics2D = (Graphics2D)graphics;
+                // Set Graphics Translations
+                // A Little Correction here Multiplication was not working so I replaced with addition
+                graphics2D.translate(pageFormat.getImageableX()+10, pageFormat.getImageableY()+10);
+                // This is a page scale. Default should be 0.3 I am using 0.5
+                graphics2D.scale(0.5, 0.5);
+                
+                // Now paint panel as graphics2D
+                panel.paint(graphics2D);
+                
+                // return if page exists
+                return Printable.PAGE_EXISTS;
+            }
+        });
+        // Store printerDialog as boolean
+        boolean returningResult = printerJob.printDialog();
+        // check if dilog is showing
+        if(returningResult){
+            // Use try catch exeption for failure
+            try{
+                // Now call print method inside printerJob to print
+                printerJob.print();
+            }catch (PrinterException printerException){
+                JOptionPane.showMessageDialog(this, "Print Error: " + printerException.getMessage());
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblCustomerName;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblMsg;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel lblTotalPrice;
+    private javax.swing.JPanel panelOrderList;
+    private javax.swing.JTable tblOrderList;
     // End of variables declaration//GEN-END:variables
 }
