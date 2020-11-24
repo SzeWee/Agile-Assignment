@@ -48,9 +48,9 @@ public class TrackingShippingProduct extends javax.swing.JFrame {
         ArrayList<ProductPurchase> list = new ArrayList<ProductPurchase>();
         ProductPurchase pp1 = new ProductPurchase(0001,"14/10/2020","Credit-Card","Delivery","Delivered");
         ProductPurchase pp2 = new ProductPurchase(0002,"18/10/2020","Debit-Card","Delivery","Delivered");
-        ProductPurchase pp3 = new ProductPurchase(0003,"21/10/2020","Debit-Card","Delivery","Dispatching from Warehouse");
-        ProductPurchase pp4 = new ProductPurchase(0004,"01/11/2020","On-Cash","Pickup","Pending");
-        ProductPurchase pp5 = new ProductPurchase(0005,"12/11/2020","On-Cash","Pickup","Processing");
+        ProductPurchase pp3 = new ProductPurchase(0003,"21/10/2020","Debit-Card","Delivery","Delivering");
+        ProductPurchase pp4 = new ProductPurchase(0004,"01/11/2020","Credit-Card","Pickup","Processing");
+        ProductPurchase pp5 = new ProductPurchase(0005,"12/11/2020","Debit-Card","Pickup","Processing");
         list.add(pp1);
         list.add(pp2);
         list.add(pp3);
