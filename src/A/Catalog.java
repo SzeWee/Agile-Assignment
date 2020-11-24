@@ -46,7 +46,7 @@ public class Catalog extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtPerPrice = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtAvailable = new javax.swing.JTextField();
+        cboAvailable = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         DataTable = new javax.swing.JTable();
@@ -77,10 +77,13 @@ public class Catalog extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jPanel1.add(txtPerPrice);
 
-        jLabel6.setText("Avaliable");
+        jLabel6.setText("Available");
         jLabel6.setToolTipText("");
         jPanel1.add(jLabel6);
-        jPanel1.add(txtAvailable);
+
+        cboAvailable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Non Available" }));
+        cboAvailable.setSelectedIndex(-1);
+        jPanel1.add(cboAvailable);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -95,6 +98,7 @@ public class Catalog extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        DataTable.setEnabled(false);
         jScrollPane1.setViewportView(DataTable);
 
         jPanel2.setLayout(new java.awt.GridLayout(1, 4, 10, 10));
@@ -160,7 +164,7 @@ public class Catalog extends javax.swing.JFrame {
             String name = txtName.getText();
             int quantity = Integer.parseInt(txtQuantity.getText());
             double price = Double.parseDouble(txtPerPrice.getText());
-            String available = txtAvailable.getText();
+            String available = cboAvailable.getSelectedItem().toString();
             DefaultTableModel model = (DefaultTableModel) DataTable.getModel();
             model.addRow(new Object[]{ID, name, quantity, price, available});
             
@@ -209,6 +213,7 @@ public class Catalog extends javax.swing.JFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cboAvailable;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -218,7 +223,6 @@ public class Catalog extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtAvailable;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPerPrice;
@@ -266,7 +270,7 @@ public class Catalog extends javax.swing.JFrame {
                 error += "Per Price must be an integer";
             }
         }
-        if(txtAvailable.getText().length()<=0){
+        if(cboAvailable.getSelectedIndex() == -1){
             isValid= false;
             error += "Available is required!\n";
         }
@@ -281,6 +285,6 @@ public class Catalog extends javax.swing.JFrame {
         txtName.setText("");
         txtQuantity.setText("");
         txtPerPrice.setText("");
-        txtAvailable.setText("");
+        cboAvailable.setSelectedIndex(-1);
     }
 }
