@@ -5,7 +5,10 @@
  */
 package D;
 
+import java.awt.Frame;
 import java.util.ArrayList;
+import javafx.scene.control.ComboBox;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,50 +20,27 @@ public class DeliveryOrder extends javax.swing.JFrame {
     /**
      * Creates new form DeliveryOrder
      */
+    
+    private OrderInfoArrayList number;
+    
     public DeliveryOrder() {
         initComponents();
         addRowToJTable();
     }
     
-    public class DeliveryOrder1{
-        public int paymentID;
-        public String customerAdress;
-        public String shippingDate;
-        public String orderStatus;
-        
-        public DeliveryOrder1(int paymentID, String customerAdress, String shippingDate, String orderStatus){
-            this.paymentID = paymentID;
-            this.customerAdress = customerAdress;
-            this.shippingDate = shippingDate;
-            this.orderStatus = orderStatus;
-        }
-    }
-    
-    public ArrayList ListProductPurchase(){
-        ArrayList<DeliveryOrder1> list = new ArrayList<DeliveryOrder1>();
-        DeliveryOrder1 pp1 = new DeliveryOrder1(0001,"No.1, Taman Satu 1 Jalan Satu 31330, Kuala Lumpur.","17/10/2020","Delivering");
-        DeliveryOrder1 pp2 = new DeliveryOrder1(0002,"No.1, Taman Satu 1 Jalan Satu 31330, Kuala Lumpur.","17/10/2020","Delivering");
-        DeliveryOrder1 pp3 = new DeliveryOrder1(0003,"No.1, Taman Satu 1 Jalan Satu 31330, Kuala Lumpur.","17/10/2020","Delivering");
-        DeliveryOrder1 pp4 = new DeliveryOrder1(0004,"No.1, Taman Satu 1 Jalan Satu 31330, Kuala Lumpur.","17/11/2020","Pending for Delivery");
-        DeliveryOrder1 pp5 = new DeliveryOrder1(0005,"No.1, Taman Satu 1 Jalan Satu 31330, Kuala Lumpur.","17/11/2020","Pending for Delivery");
-        list.add(pp1);
-        list.add(pp2);
-        list.add(pp3);
-        list.add(pp4);
-        list.add(pp5);
-        return list;
-    }
-    
     public void addRowToJTable(){
+        
+        number = new OrderInfoArrayList();
+        ArrayList<OrderInfo> list = number.listofOrder();
+        
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        ArrayList<DeliveryOrder1> list = ListProductPurchase();
-        Object rowData[] = new Object[4];
+        Object rowData[] = new Object[10];
         jTable1.setRowHeight(40);
         for(int i=0; i<list.size(); i++){
-            rowData[0] = list.get(i).paymentID;
-            rowData[1] = list.get(i).customerAdress;
+            rowData[0] = list.get(i).orderID;
+            rowData[1] = list.get(i).customerAddress;
             rowData[2] = list.get(i).shippingDate;
-            rowData[3] = list.get(i).orderStatus;
+            rowData[3] = list.get(i).productStatus;
             model.addRow(rowData);
         }
     }
@@ -79,6 +59,7 @@ public class DeliveryOrder extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,12 +75,6 @@ public class DeliveryOrder extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setHeaderValue("Order ID");
-            jTable1.getColumnModel().getColumn(1).setHeaderValue("Customer Address");
-            jTable1.getColumnModel().getColumn(2).setHeaderValue("Shipping Date");
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Order Status");
-        }
 
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +84,18 @@ public class DeliveryOrder extends javax.swing.JFrame {
         });
 
         jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Processing", "Delivering", "Delivered" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,6 +105,8 @@ public class DeliveryOrder extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
                         .addComponent(jButton2)
                         .addGap(46, 46, 46)
                         .addComponent(jButton1))
@@ -140,7 +129,8 @@ public class DeliveryOrder extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -157,6 +147,19 @@ public class DeliveryOrder extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        if(jTable1.getSelectedRowCount() == 1){
+            String updateProductStatus = (String) jComboBox1.getSelectedItem();
+            model.setValueAt(updateProductStatus, jTable1.getSelectedRow(), 3);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -166,22 +169,6 @@ public class DeliveryOrder extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeliveryOrder1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeliveryOrder1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeliveryOrder1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeliveryOrder1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -202,6 +189,7 @@ public class DeliveryOrder extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

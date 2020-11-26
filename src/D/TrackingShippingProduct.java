@@ -23,34 +23,37 @@ public class TrackingShippingProduct extends javax.swing.JFrame {
     /**
      * Creates new form ProductPurchasing
      */
+    
+    private OrderInfoArrayList number;
+    
     public TrackingShippingProduct() {
         initComponents();
         addRowToJTable();
-    }
+    }/*
     //a
         public class ProductPurchase{
         public int id;
         public String purchaseDate;
         public String paymentType;
-        public String purchaseType;
+        public String shippingDate;
         public String productStatus;
         
-        public ProductPurchase(int id, String purchaseDate, String paymentType, String purchaseType, String productStatus){
+        public ProductPurchase(int id, String purchaseDate, String shippingDate, String paymentType, String productStatus){
             this.id = id;
             this.purchaseDate = purchaseDate;
             this.paymentType = paymentType;
-            this.purchaseType = purchaseType;
+            this.shippingDate = shippingDate;
             this.productStatus = productStatus;
         }
     }
         
         public ArrayList ListProductPurchase(){
         ArrayList<ProductPurchase> list = new ArrayList<ProductPurchase>();
-        ProductPurchase pp1 = new ProductPurchase(0001,"14/10/2020","Credit-Card","Delivery","Delivered");
-        ProductPurchase pp2 = new ProductPurchase(0002,"18/10/2020","Debit-Card","Delivery","Delivered");
-        ProductPurchase pp3 = new ProductPurchase(0003,"21/10/2020","Debit-Card","Delivery","Delivering");
-        ProductPurchase pp4 = new ProductPurchase(0004,"01/11/2020","Credit-Card","Pickup","Processing");
-        ProductPurchase pp5 = new ProductPurchase(0005,"12/11/2020","Debit-Card","Pickup","Processing");
+        ProductPurchase pp1 = new ProductPurchase(0001,"14/10/2020","17/10/2020","Credit-Card","Delivered");
+        ProductPurchase pp2 = new ProductPurchase(0002,"18/10/2020","21/10/2020","Debit-Card","Delivered");
+        ProductPurchase pp3 = new ProductPurchase(0003,"21/10/2020","27/10/2020","Debit-Card","Delivering");
+        ProductPurchase pp4 = new ProductPurchase(0004,"01/11/2020","05/11/2020","Credit-Card","Processing");
+        ProductPurchase pp5 = new ProductPurchase(0005,"12/11/2020","17/11/2020","Debit-Card","Processing");
         list.add(pp1);
         list.add(pp2);
         list.add(pp3);
@@ -66,9 +69,26 @@ public class TrackingShippingProduct extends javax.swing.JFrame {
         for(int i=0; i<list.size(); i++){
             rowData[0] = list.get(i).id;
             rowData[1] = list.get(i).purchaseDate;
-            rowData[2] = list.get(i).paymentType;
-            rowData[3] = list.get(i).purchaseType;
+            rowData[2] = list.get(i).shippingDate;
+            rowData[3] = list.get(i).paymentType;
             rowData[4] = list.get(i).productStatus;
+            model.addRow(rowData);
+        }
+    }*/
+    
+    public void addRowToJTable(){
+        
+        number = new OrderInfoArrayList();
+        ArrayList<OrderInfo> list = number.listofOrder();
+        
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        Object rowData[] = new Object[10];
+        jTable1.setRowHeight(40);
+        for(int i=0; i<list.size(); i++){
+            rowData[0] = list.get(i).orderID;
+            rowData[1] = list.get(i).customerAddress;
+            rowData[2] = list.get(i).shippingDate;
+            rowData[3] = list.get(i).productStatus;
             model.addRow(rowData);
         }
     }
@@ -97,7 +117,7 @@ public class TrackingShippingProduct extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Payment ID", "Purchase Date", "Payment Type", "Trading Type", "Product Status"
+                "Order ID", "Shipping Address", "Shipping Date", "Product Status"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -118,10 +138,10 @@ public class TrackingShippingProduct extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(40, 40, 40)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(258, 258, 258)
