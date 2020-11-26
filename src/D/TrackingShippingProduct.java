@@ -29,52 +29,7 @@ public class TrackingShippingProduct extends javax.swing.JFrame {
     public TrackingShippingProduct() {
         initComponents();
         addRowToJTable();
-    }/*
-    //a
-        public class ProductPurchase{
-        public int id;
-        public String purchaseDate;
-        public String paymentType;
-        public String shippingDate;
-        public String productStatus;
-        
-        public ProductPurchase(int id, String purchaseDate, String shippingDate, String paymentType, String productStatus){
-            this.id = id;
-            this.purchaseDate = purchaseDate;
-            this.paymentType = paymentType;
-            this.shippingDate = shippingDate;
-            this.productStatus = productStatus;
-        }
     }
-        
-        public ArrayList ListProductPurchase(){
-        ArrayList<ProductPurchase> list = new ArrayList<ProductPurchase>();
-        ProductPurchase pp1 = new ProductPurchase(0001,"14/10/2020","17/10/2020","Credit-Card","Delivered");
-        ProductPurchase pp2 = new ProductPurchase(0002,"18/10/2020","21/10/2020","Debit-Card","Delivered");
-        ProductPurchase pp3 = new ProductPurchase(0003,"21/10/2020","27/10/2020","Debit-Card","Delivering");
-        ProductPurchase pp4 = new ProductPurchase(0004,"01/11/2020","05/11/2020","Credit-Card","Processing");
-        ProductPurchase pp5 = new ProductPurchase(0005,"12/11/2020","17/11/2020","Debit-Card","Processing");
-        list.add(pp1);
-        list.add(pp2);
-        list.add(pp3);
-        list.add(pp4);
-        list.add(pp5);
-        return list;
-    }
-        
-        public void addRowToJTable(){
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        ArrayList<ProductPurchase> list = ListProductPurchase();
-        Object rowData[] = new Object[5];
-        for(int i=0; i<list.size(); i++){
-            rowData[0] = list.get(i).id;
-            rowData[1] = list.get(i).purchaseDate;
-            rowData[2] = list.get(i).shippingDate;
-            rowData[3] = list.get(i).paymentType;
-            rowData[4] = list.get(i).productStatus;
-            model.addRow(rowData);
-        }
-    }*/
     
     public void addRowToJTable(){
         

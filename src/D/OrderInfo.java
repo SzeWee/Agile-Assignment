@@ -14,14 +14,16 @@ import java.util.ArrayList;
 public class OrderInfo {
     
         public String orderID;
+        public String customerName;
         public String purchaseDate;
         public String paymentType;
         public String shippingDate;
         public String customerAddress;
         public String productStatus;
         
-        public OrderInfo(String orderID, String purchaseDate, String shippingDate, String paymentType, String customerAddress, String productStatus){
+        public OrderInfo(String orderID, String customerName, String purchaseDate, String shippingDate, String paymentType, String customerAddress, String productStatus){
             this.orderID = orderID;
+            this.customerName = customerName;
             this.purchaseDate = purchaseDate;
             this.paymentType = paymentType;
             this.shippingDate = shippingDate;
@@ -35,6 +37,14 @@ public class OrderInfo {
 
     public void setOrderID(String orderID) {
         this.orderID = orderID;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getPurchaseDate() {

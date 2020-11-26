@@ -38,9 +38,10 @@ public class DeliveryOrder extends javax.swing.JFrame {
         jTable1.setRowHeight(40);
         for(int i=0; i<list.size(); i++){
             rowData[0] = list.get(i).orderID;
-            rowData[1] = list.get(i).customerAddress;
-            rowData[2] = list.get(i).shippingDate;
-            rowData[3] = list.get(i).productStatus;
+            rowData[1] = list.get(i).customerName;
+            rowData[2] = list.get(i).customerAddress;
+            rowData[3] = list.get(i).shippingDate;
+            rowData[4] = list.get(i).productStatus;
             model.addRow(rowData);
         }
     }
