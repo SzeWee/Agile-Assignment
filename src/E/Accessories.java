@@ -12,9 +12,11 @@ package E;
 public class Accessories {
     String name;
     int price;
+    String stock;
     
-    public Accessories(String An, int Ap){
+    public Accessories(String An, int Ap, String stock2){
         this.name = An;
         this.price = Ap;
+        this.stock=stock2;
     }
 }

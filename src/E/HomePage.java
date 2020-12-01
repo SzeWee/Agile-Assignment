@@ -5,6 +5,8 @@
  */
 package E;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author User
@@ -14,10 +16,21 @@ public class HomePage extends javax.swing.JFrame {
     /**
      * Creates new form HomePage
      */
+    ArrayList<product> prod = new ArrayList<>();
+    ArrayList<Accessories> Acc = new ArrayList<>();
+    ArrayList<customizedProduct> CusProd = new ArrayList<>(); 
+    
     public HomePage() {
         initComponents();
     }
-
+    
+    public HomePage(ArrayList<customizedProduct> cp2, ArrayList<product> prod2,ArrayList<Accessories> Acc2 ){
+        this.CusProd = cp2;
+        this.prod=prod2;
+        this.Acc=Acc2;
+        initComponents();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,14 +88,14 @@ public class HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        CustomizedFloral CusFloral = new CustomizedFloral();
-        CusFloral.setVisible(true);
+        new CustomizedFloral(CusProd, prod, Acc).setVisible(true);
+        this.setVisible(false);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        MyOrderPage orderPage = new MyOrderPage();
-        orderPage.setVisible(true);
+        new MyOrderPage(CusProd, prod, Acc).setVisible(true);
+        this.setVisible(false);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 

@@ -18,7 +18,9 @@ public class CustomizedFloral extends javax.swing.JFrame {
     /**
      * Creates new form CustomizedFloral
      */
-     
+    ArrayList<product> prod = new ArrayList<>();
+    ArrayList<Accessories> Acc = new ArrayList<>();
+    ArrayList<customizedProduct> CusProd = new ArrayList<>(); 
     public CustomizedFloral() {
         initComponents(); 
         init();
@@ -26,12 +28,24 @@ public class CustomizedFloral extends javax.swing.JFrame {
         jLabel14.setText("0");
         jLabel15.setText("0");
         jLabel7.setText("0");
+        jLabel21.setVisible(false);
+        jLabel20.setVisible(false);
     }
 
+    public CustomizedFloral(ArrayList<customizedProduct> CusProd2, ArrayList<product> prod2,ArrayList<Accessories> Acc2){
+        this.CusProd = CusProd2;
+        this.prod=prod2;
+        this.Acc=Acc2;
+        initComponents(); 
+        init();
+        refreshFlower();
+        jLabel14.setText("0");
+        jLabel15.setText("0");
+        jLabel7.setText("0");
+        jLabel21.setVisible(false);
+        jLabel20.setVisible(false);
+    }
     
-    ArrayList<product> prod = new ArrayList<>();
-    ArrayList<Accessories> Acc = new ArrayList<>();
-    ArrayList<customizedProduct> CusProd = new ArrayList<>();
     public void init(){
         product flower1 = new product("Lily",12,"Available");
         product flower2 = new product("Rose",15,"Available");
@@ -42,12 +56,15 @@ public class CustomizedFloral extends javax.swing.JFrame {
         prod.add(flower3);
         prod.add(flower4);
         
-        Accessories acc1 = new Accessories("Crystal Box", 12);
-        Accessories acc2 = new Accessories("Flower Basket", 12);
-        Accessories acc3 = new Accessories("Flower Box", 12);
+        Accessories acc1 = new Accessories("Crystal Box", 12, "Available");
+        Accessories acc2 = new Accessories("Flower Basket", 12, "Available");
+        Accessories acc3 = new Accessories("Flower Box", 12, "Not Available");
         Acc.add(acc1);
         Acc.add(acc2);
         Acc.add(acc3);
+        
+        customizedProduct cus = new customizedProduct("asd","asd","Rose","asd",12,"asd");
+        CusProd.add(cus);
     }
     
     public void refreshFlower(){
@@ -103,6 +120,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Floral Style");
@@ -233,6 +252,10 @@ public class CustomizedFloral extends javax.swing.JFrame {
             }
         });
 
+        jLabel21.setText("jLabel21");
+
+        jLabel20.setText("jLabel20");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -241,30 +264,39 @@ public class CustomizedFloral extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel17))
-                                .addGap(15, 15, 15)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 225, Short.MAX_VALUE)
-                                        .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3))))))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(15, 15, 15))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel21)
+                                .addGap(103, 103, 103)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 225, Short.MAX_VALUE)
+                                .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel20)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -377,12 +409,15 @@ public class CustomizedFloral extends javax.swing.JFrame {
                             .addComponent(jLabel7))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 5, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jButton2)
-                            .addComponent(jButton3))
-                        .addGap(32, 32, 32))))
+                            .addComponent(jButton3)
+                            .addComponent(jLabel21))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel20)
+                        .addGap(21, 21, 21))))
         );
 
         jLabel7.getAccessibleContext().setAccessibleName("prizeSum");
@@ -396,11 +431,11 @@ public class CustomizedFloral extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int response = JOptionPane.showConfirmDialog(this, "Confirm Order", "Confirmation", JOptionPane.YES_NO_OPTION);
-        if(response == JOptionPane.YES_OPTION){
-            if(jComboBox4.getSelectedIndex() == 1){
+        if(response == JOptionPane.YES_OPTION){            
+            if(jLabel21.getText() == "Not Available"){
                 JOptionPane.showMessageDialog(this,"accessories out of stock, please select another accessories ");
             }
-            else if(jComboBox2.getSelectedIndex() == 1){
+            else if(jLabel20.getText() == "Not Available"){
                 JOptionPane.showMessageDialog(this,"flower out of stock, please select another flower ");
             }
             else if(jLabel7.getText() == "0" || jLabel12.getText() =="0" || jLabel13.getText() =="0"|| jLabel14.getText() =="0"|| jLabel15.getText() =="0"){
@@ -431,6 +466,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
         for(int i=0; i <Acc.size(); i++){
             if(jComboBox4.getSelectedItem() == Acc.get(i).name){
                 jLabel15.setText(String.valueOf(Acc.get(i).price));
+                jLabel21.setText(String.valueOf(Acc.get(i).stock));
             }
         }
         getTotal();
@@ -483,6 +519,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
         for(int i=0; i <prod.size(); i++){
             if(jComboBox2.getSelectedItem() == prod.get(i).flowerName){
                 jLabel14.setText(String.valueOf(prod.get(i).flowerPrice));
+                jLabel20.setText(String.valueOf(prod.get(i).flowerStock));
             }
         }    
         getTotal();
@@ -517,10 +554,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        HomePage HP = new HomePage();
-        CustomizedFloral cusFloral = new CustomizedFloral();
-        cusFloral.setVisible(false);
-        HP.setVisible(true);
+        new HomePage(CusProd, prod, Acc).setVisible(true);
+        this.setVisible(false);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -594,6 +629,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

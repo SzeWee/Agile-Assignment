@@ -14,29 +14,43 @@ import javax.swing.table.DefaultTableModel;
  * @author User
  */
 public class MyOrderPage extends javax.swing.JFrame {
-    ArrayList<customizedProduct> cusProd = new ArrayList<>();
+    ArrayList<product> prod = new ArrayList<>();
+    ArrayList<Accessories> Acc = new ArrayList<>();
+    ArrayList<customizedProduct> CusProd = new ArrayList<>(); 
     /**
      * Creates new form MyOrderPage
      */
     public MyOrderPage() {
-        refreshTable();
         initComponents();
         init();
+        refreshTable();
+    }
+    
+    public MyOrderPage(ArrayList<customizedProduct> CusProd2, ArrayList<product> prod2,ArrayList<Accessories> Acc2){
+        this.CusProd = CusProd2;
+        this.prod=prod2;
+        this.Acc=Acc2;
+        initComponents(); 
+        refreshTable();
     }
 
     public void init(){
-        customizedProduct cus = new customizedProduct("asd","asd","asd","asd",12,"asd");
-        cusProd.add(cus);
+        customizedProduct cus = new customizedProduct("asd","asd","Lily","asd",12,"asd");
+        CusProd.add(cus);
         
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        for(int i=0; i < cusProd.size(); i++){
+        int rowCount = model.getRowCount();
+            for(int i=rowCount-1 ; i>=0;i--){
+                model.removeRow(i);
+            }
+        for(int i=0; i < CusProd.size(); i++){
             model.addRow(new Object[]{ 
-                cusProd.get(i).getSelectedStyle(),
-                cusProd.get(i).getSelectedSize(),
-                cusProd.get(i).getSelectedFlower(),
-                cusProd.get(i).getSelectedAccessories(),
-                cusProd.get(i).getSumPrice(),
-                cusProd.get(i).getPickup()           
+                CusProd.get(i).getSelectedStyle(),
+                CusProd.get(i).getSelectedSize(),
+                CusProd.get(i).getSelectedFlower(),
+                CusProd.get(i).getSelectedAccessories(),
+                CusProd.get(i).getSumPrice(),
+                CusProd.get(i).getPickup()           
             });
         }
     }
@@ -47,20 +61,19 @@ public class MyOrderPage extends javax.swing.JFrame {
             for(int i=rowCount-1 ; i>=0;i--){
                 model.removeRow(i);
             }
-            for(int i=0; i < cusProd.size(); i++){
+            for(int i=0; i < CusProd.size(); i++){
             model.addRow(new Object[]{
-                cusProd.get(i).getSelectedStyle(),
-                cusProd.get(i).getSelectedSize(),
-                cusProd.get(i).getSelectedFlower(),
-                cusProd.get(i).getSelectedAccessories(),
-                cusProd.get(i).getSumPrice(),
-                cusProd.get(i).getPickup()  
+                CusProd.get(i).getSelectedStyle(),
+                CusProd.get(i).getSelectedSize(),
+                CusProd.get(i).getSelectedFlower(),
+                CusProd.get(i).getSelectedAccessories(),
+                CusProd.get(i).getSumPrice(),
+                CusProd.get(i).getPickup()  
             });  
         }
         jTable1.setRowSelectionAllowed(true);
         jTable1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);            
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,7 +102,7 @@ public class MyOrderPage extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Style", "Size", "Flower", "Accessories", "Price", "Delivery Status"
+                "Style", "Size", "Flower", "Accessories", "Price(RM)", "Delivery Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -125,25 +138,22 @@ public class MyOrderPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 54, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(352, 352, 352))))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
@@ -154,8 +164,8 @@ public class MyOrderPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        HomePage HP = new HomePage();
-        HP.setVisible(true);
+        new HomePage(CusProd, prod, Acc).setVisible(true);
+        this.setVisible(false);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

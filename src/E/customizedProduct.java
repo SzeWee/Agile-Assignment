@@ -25,7 +25,9 @@ public class customizedProduct {
         this.SumPrice = SumPrice;
         this.pickup = pickup;
     }
-    
+
+    public customizedProduct(){
+    }
     
     public String getSelectedStyle() {
         return selectedStyle;
@@ -73,13 +75,5 @@ public class customizedProduct {
 
     public void setPickup(String pickup) {
         this.pickup = pickup;
-    }
-    
-    
-    
-    
-    
-        public String toString(){
-        return String.format(" Style: %s\n Size: %s\n Flower: %s\n Accessories: %s\n Price: %d\n",selectedStyle ,selectedSize,selectedFlower,selectedAccessories,SumPrice);
     }
 }
