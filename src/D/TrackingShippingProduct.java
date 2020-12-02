@@ -24,7 +24,7 @@ public class TrackingShippingProduct extends javax.swing.JFrame {
      * Creates new form ProductPurchasing
      */
     
-    private OrderInfoArrayList number;
+    private DeliveryOrder number;
     
     public TrackingShippingProduct() {
         initComponents();
@@ -33,7 +33,7 @@ public class TrackingShippingProduct extends javax.swing.JFrame {
     
     public void addRowToJTable(){
         
-        number = new OrderInfoArrayList();
+        number = new DeliveryOrder();
         ArrayList<OrderInfo> list = number.listofOrder();
         
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();

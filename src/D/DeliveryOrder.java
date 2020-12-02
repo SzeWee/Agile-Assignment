@@ -9,6 +9,7 @@ import java.awt.Frame;
 import java.util.ArrayList;
 import javafx.scene.control.ComboBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,7 +22,7 @@ public class DeliveryOrder extends javax.swing.JFrame {
      * Creates new form DeliveryOrder
      */
     
-    private OrderInfoArrayList number;
+    //private OrderInfoArrayList number;
     
     public DeliveryOrder() {
         initComponents();
@@ -30,10 +31,11 @@ public class DeliveryOrder extends javax.swing.JFrame {
     
     public void addRowToJTable(){
         
-        number = new OrderInfoArrayList();
-        ArrayList<OrderInfo> list = number.listofOrder();
+        //number = new OrderInfoArrayList();
+        //ArrayList<OrderInfo> list = number.listofOrder();
         
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        ArrayList<OrderInfo> list = listofOrder();
         Object rowData[] = new Object[10];
         jTable1.setRowHeight(40);
         for(int i=0; i<list.size(); i++){
@@ -44,6 +46,21 @@ public class DeliveryOrder extends javax.swing.JFrame {
             rowData[4] = list.get(i).productStatus;
             model.addRow(rowData);
         }
+    }
+    
+    public ArrayList listofOrder(){
+        ArrayList<OrderInfo> list = new ArrayList<>();
+        OrderInfo oi1 = new OrderInfo("O00001","Colwin Yik","17/10/2020","24/10/2020","Credit-Card","No.1, Taman Satu 1 Jalan Satu 31330, Kuala Lumpur.","Delivered");
+        OrderInfo oi2 = new OrderInfo("O00002","Michael Lee","24/10/2020","27/10/2020","Debit-Card","K379, Taman Bunga 12, Jalan Tiga 45910, Ipoh Perak.","Delivered");
+        OrderInfo oi3 = new OrderInfo("O00003","John Cena","29/10/2020","02/11/2020","Credit-Card","Block C-11, Taman Mahatir 7, Jalan Badawi 55730, Shah Alam.","Delivering");
+        OrderInfo oi4 = new OrderInfo("O00004","James Bond","07/11/2020","10/11/2020","Debit-Card","No.3, Jalan Pasir Delima 7, Jalan Badawi 55730, Shah Alam.","Processing");
+        OrderInfo oi5 = new OrderInfo("O00005","Peter Chiu","13/11/2020","16/11/2020","Credit-Card","A113, Taman Selangor 7, Jalan Badawi 55730, Shah Alam.","Processing");
+        list.add(oi1);
+        list.add(oi2);
+        list.add(oi3);
+        list.add(oi4);
+        list.add(oi5);
+        return list;
     }
 
     /**
@@ -60,7 +77,8 @@ public class DeliveryOrder extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,7 +90,7 @@ public class DeliveryOrder extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Order ID", "Customer Address", "Shipping Date", "Order Status"
+                "Order ID", "Customer Name", "Customer Address", "Shipping Date", "Order Status"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -91,48 +109,58 @@ public class DeliveryOrder extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Processing", "Delivering", "Delivered" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Waiting", "Pending Delivery-man", "Delivering", "Delivered Successful" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Update Order Status:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(283, 283, 283)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jButton2)
-                        .addGap(46, 46, 46)
-                        .addComponent(jButton1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(253, 253, 253)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(52, 52, 52)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addComponent(jButton1))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -154,11 +182,23 @@ public class DeliveryOrder extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        if(jTable1.getSelectedRowCount() == 1){
-            String updateProductStatus = (String) jComboBox1.getSelectedItem();
-            model.setValueAt(updateProductStatus, jTable1.getSelectedRow(), 3);
+        int response = JOptionPane.showConfirmDialog(this,"Do you want to update this Product Status ?","Confirmation Message",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(response==JOptionPane.YES_OPTION){        
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            if(jTable1.getSelectedRowCount() == 1){
+                String updateProductStatus = (String) jComboBox1.getSelectedItem();
+                model.setValueAt(updateProductStatus, jTable1.getSelectedRow(), 4);
+            }
+        JOptionPane.showMessageDialog(this,"Update Successful !","Update Successful",JOptionPane.INFORMATION_MESSAGE);
         }
+        
+        /*String updateProductStatus = (String) jComboBox1.getSelectedItem();
+        ArrayList<OrderInfo> list = listofOrder();
+        listofOrder()..productStatus = updateProductStatus;
+        model.setRowCount(0);
+        for(int i=0; i<listofOrder();i++){
+            Object[] objs = (listofOrder().get(i).orderID)
+        }*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -192,6 +232,7 @@ public class DeliveryOrder extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class OrderInfoArrayList {
     
-    public ArrayList listofOrder(){
+    /*public ArrayList listofOrder(){
         ArrayList<OrderInfo> list = new ArrayList<>();
         OrderInfo oi1 = new OrderInfo("O00001","Colwin Yik","17/10/2020","24/10/2020","Credit-Card","No.1, Taman Satu 1 Jalan Satu 31330, Kuala Lumpur.","Delivered");
         OrderInfo oi2 = new OrderInfo("O00002","Michael Lee","24/10/2020","27/10/2020","Debit-Card","K379, Taman Bunga 12, Jalan Tiga 45910, Ipoh Perak.","Delivered");
@@ -26,5 +26,5 @@ public class OrderInfoArrayList {
         list.add(oi4);
         list.add(oi5);
         return list;
-    }
+    }*/
 }
