@@ -9,6 +9,7 @@ import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -22,7 +23,7 @@ public class Catalog extends javax.swing.JFrame {
     JFrame frame;
     public Catalog() {
         initComponents();
-        String [] cols = {"ID", "Name", "Quanriry", "PerPrice", "Available"};
+        String [] cols = {"ID", "Name", "Quanriry", "PerPrice", "Description", "Available"};
         DefaultTableModel modal = new DefaultTableModel(null, cols);
         DataTable.setModel(modal);
     }
@@ -45,6 +46,8 @@ public class Catalog extends javax.swing.JFrame {
         txtQuantity = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtPerPrice = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtDescription = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         cboAvailable = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
@@ -59,7 +62,7 @@ public class Catalog extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Catelog Maintenance"));
-        jPanel1.setLayout(new java.awt.GridLayout(5, 2, 10, 2));
+        jPanel1.setLayout(new java.awt.GridLayout(6, 2, 10, 2));
 
         jLabel2.setText("ID");
         jPanel1.add(jLabel2);
@@ -76,6 +79,10 @@ public class Catalog extends javax.swing.JFrame {
         jLabel5.setText("Per Price");
         jPanel1.add(jLabel5);
         jPanel1.add(txtPerPrice);
+
+        jLabel1.setText("Description");
+        jPanel1.add(jLabel1);
+        jPanel1.add(txtDescription);
 
         jLabel6.setText("Available");
         jLabel6.setToolTipText("");
@@ -98,7 +105,11 @@ public class Catalog extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        DataTable.setEnabled(false);
+        DataTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DataTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(DataTable);
 
         jPanel2.setLayout(new java.awt.GridLayout(1, 4, 10, 10));
@@ -112,12 +123,24 @@ public class Catalog extends javax.swing.JFrame {
         jPanel2.add(btnAdd);
 
         btnUpdate.setText("Update");
+        btnUpdate.setEnabled(false);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnUpdate);
 
         btnDelete.setText("Delete");
+        btnDelete.setEnabled(false);
         jPanel2.add(btnDelete);
 
         btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnReset);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -146,10 +169,9 @@ public class Catalog extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -164,13 +186,80 @@ public class Catalog extends javax.swing.JFrame {
             String name = txtName.getText();
             int quantity = Integer.parseInt(txtQuantity.getText());
             double price = Double.parseDouble(txtPerPrice.getText());
+            String description = txtDescription.getText();
             String available = cboAvailable.getSelectedItem().toString();
-            DefaultTableModel model = (DefaultTableModel) DataTable.getModel();
-            model.addRow(new Object[]{ID, name, quantity, price, available});
+            if(DataTable.getRowCount()> -1){
+                for(int i=0; i<DataTable.getRowCount(); i++){
+                    String id = DataTable.getValueAt(i, 1).toString();
+                    if(ID.equals(id)){
+                        JOptionPane.showMessageDialog(frame, "ID must be unique!", "Error", JOptionPane.ERROR_MESSAGE );
+                        return;
+                    }
+                }
+            }
             
+            DefaultTableModel model = (DefaultTableModel) DataTable.getModel();
+            model.addRow(new Object[]{ID, name, quantity, price, description, available});
+            JOptionPane.showMessageDialog(frame, "Added Success!", "Added Success", JOptionPane.INFORMATION_MESSAGE );
             clear();
         }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void DataTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataTableMouseClicked
+        int index  = DataTable.getSelectedRow();
+        TableModel model = DataTable.getModel();
+        String id = model.getValueAt(index, 0).toString();
+        String name = model.getValueAt(index, 1).toString();
+        String quantity = model.getValueAt(index, 2).toString();
+        String price = model.getValueAt(index, 3).toString();
+        String description = model.getValueAt(index, 4).toString();
+        String available = model.getValueAt(index, 5).toString();
+        
+        txtID.setText(id);
+        txtID.setEnabled(false);
+        txtName.setText(name);
+        txtQuantity.setText(quantity);
+        txtPerPrice.setText(price);
+        txtDescription.setText(description);
+        cboAvailable.setSelectedItem(available);
+        btnAdd.setEnabled(false);
+        btnUpdate.setEnabled(true);
+        btnDelete.setEnabled(true);
+    }//GEN-LAST:event_DataTableMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        boolean isValid = validation();    
+        if(isValid == false){
+            return;
+        }else{
+            for(int i=0; i<DataTable.getRowCount(); i++){
+                String id = DataTable.getValueAt(i, 1).toString();
+                    if(txtID.getText().equals(id)){
+                        String ID = txtID.getText();
+                        String name = txtName.getText();
+                        int quantity = Integer.parseInt(txtQuantity.getText());
+                        double price = Double.parseDouble(txtPerPrice.getText());
+                        String description = txtDescription.getText();
+                        String available = cboAvailable.getSelectedItem().toString();
+                        
+                        DataTable.setValueAt(name,i,1);
+                        DataTable.setValueAt(quantity,i,2);
+                        DataTable.setValueAt(price,i,3);
+                        DataTable.setValueAt(description,i,4);
+                        DataTable.setValueAt(available,i,5);
+                        JOptionPane.showMessageDialog(frame, "Updated Success!", "Updated Success", JOptionPane.INFORMATION_MESSAGE );
+                        break;
+                    }
+            }
+            clear();
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btnResetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,6 +303,7 @@ public class Catalog extends javax.swing.JFrame {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cboAvailable;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -223,6 +313,7 @@ public class Catalog extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPerPrice;
@@ -270,6 +361,10 @@ public class Catalog extends javax.swing.JFrame {
                 error += "Per Price must be an integer";
             }
         }
+        if(txtDescription.getText().length()<=0){
+            isValid = false;
+            error += "Description is required!\n";
+        }
         if(cboAvailable.getSelectedIndex() == -1){
             isValid= false;
             error += "Available is required!\n";
@@ -285,6 +380,11 @@ public class Catalog extends javax.swing.JFrame {
         txtName.setText("");
         txtQuantity.setText("");
         txtPerPrice.setText("");
+        txtDescription.setText("");
         cboAvailable.setSelectedIndex(-1);
+        txtID.setEnabled(true);
+        btnAdd.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(false);
     }
 }
