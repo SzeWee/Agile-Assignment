@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+
 public class CatalogOrdersForm extends javax.swing.JFrame {
 
     public CatalogOrdersForm() {
@@ -270,16 +271,25 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
         double SunflowerPrice = 7.00;
         double OrchidPrice = 10.00;
         double DaisyPrice = 4.00;
-        if (selectionComboBox.getSelectedIndex() == 0) {
-            lblUnitPrice.setText("" + RosePrice);
-        } else if (selectionComboBox.getSelectedIndex() == 1) {
-            lblUnitPrice.setText("" + TulipPrice);
-        } else if (selectionComboBox.getSelectedIndex() == 2) {
-            lblUnitPrice.setText("" + SunflowerPrice);
-        } else if (selectionComboBox.getSelectedIndex() == 3) {
-            lblUnitPrice.setText("" + OrchidPrice);
-        } else if (selectionComboBox.getSelectedIndex() == 4) {
-            lblUnitPrice.setText("" + DaisyPrice);
+        
+        switch (selectionComboBox.getSelectedIndex()) {
+            case 0:
+                lblUnitPrice.setText("" + String.format("%.2f", RosePrice));
+                break;
+            case 1:
+                lblUnitPrice.setText("" + String.format("%.2f", TulipPrice));
+                break;
+            case 2:
+                lblUnitPrice.setText("" + String.format("%.2f", SunflowerPrice));
+                break;
+            case 3:
+                lblUnitPrice.setText("" + String.format("%.2f", OrchidPrice));
+                break;
+            case 4:
+                lblUnitPrice.setText("" + String.format("%.2f", DaisyPrice));
+                break;
+            default:
+                break;
         }
     }//GEN-LAST:event_selectionComboBoxActionPerformed
 
@@ -304,7 +314,7 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
                 double Price = qtySelected * parseDouble(lblUnitPrice.getText());
 
                 //store entered data into String array
-                String orderData[] = {selectionComboBox.getSelectedItem().toString(), txtQuantity.getText(), lblUnitPrice.getText(), String.valueOf(Price)};
+                String orderData[] = {selectionComboBox.getSelectedItem().toString(), txtQuantity.getText(), lblUnitPrice.getText(), String.format("%.2f", Price)};
 
                 DefaultTableModel tblModel = (DefaultTableModel) tblMyOrder.getModel();
 
@@ -316,7 +326,7 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
                 txtQuantity.setText("");
 
                 double FinalTotalPrice = (calTotalPrice(Price));
-                lblTotalPrice.setText(String.valueOf(FinalTotalPrice));
+                lblTotalPrice.setText(String.format("%.2f", FinalTotalPrice));
 
             }
         }

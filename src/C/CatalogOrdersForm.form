@@ -75,10 +75,8 @@
                                   <Component id="txtStreet" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="txtPostcode" alignment="0" max="32767" attributes="0"/>
-                                              <Component id="btnAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="txtPostcode" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="btnAddress" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="txtCity" alignment="0" max="32767" attributes="0"/>
                                           <Component id="txtState" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
                                       </Group>
