@@ -23,7 +23,7 @@ public class Catalog extends javax.swing.JFrame {
     JFrame frame;
     public Catalog() {
         initComponents();
-        String [] cols = {"ID", "Name", "Quanriry", "PerPrice", "Description", "Available"};
+        String [] cols = {"ID", "Name", "Quanriry", "PerPrice", "Description", "Status"};
         DefaultTableModel modal = new DefaultTableModel(null, cols);
         DataTable.setModel(modal);
     }
@@ -84,7 +84,7 @@ public class Catalog extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jPanel1.add(txtDescription);
 
-        jLabel6.setText("Available");
+        jLabel6.setText("Status");
         jLabel6.setToolTipText("");
         jPanel1.add(jLabel6);
 
