@@ -62,8 +62,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
         Acc.add(acc1);
         Acc.add(acc2);
         Acc.add(acc3);
-        
-        customizedProduct cus = new customizedProduct("asd","asd","Rose","asd",12,"asd");
+
+        customizedProduct cus = new customizedProduct("CF001","asd","asd","Lily","asd",12,"asd");
         CusProd.add(cus);
     }
     
@@ -79,7 +79,21 @@ public class CustomizedFloral extends javax.swing.JFrame {
                 }
     }
     
-    
+    public String GenNewID(){
+    String newID = "";
+    if(!CusProd.isEmpty()){
+        int promoID = CusProd.size() -1;
+        String lastPromoID = CusProd.get(promoID).newID;
+        String prefix = lastPromoID.substring(0,2);
+        int integer = Integer.parseInt(lastPromoID.substring(2,5));
+        integer +=1;  
+        newID = prefix + String.format("%03d", integer);
+    }else{
+        newID = "CF001";
+    }
+    return newID;
+    }
+        
     /**Rose, Lily, Tulip, Orchid, Carnation, Hyacinth
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,6 +136,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Floral Style");
@@ -256,6 +271,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
 
         jLabel20.setText("jLabel20");
 
+        jLabel22.setText("jLabel22");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -296,7 +313,10 @@ public class CustomizedFloral extends javax.swing.JFrame {
                                 .addComponent(jButton3))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel20)))
+                        .addComponent(jLabel20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel22)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -417,7 +437,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
                             .addComponent(jLabel21))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel20)
-                        .addGap(21, 21, 21))))
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabel22))))
         );
 
         jLabel7.getAccessibleContext().setAccessibleName("prizeSum");
@@ -448,9 +469,8 @@ public class CustomizedFloral extends javax.swing.JFrame {
             String cusAcc= jComboBox4.getSelectedItem().toString();
             String pickup =jComboBox5.getSelectedItem().toString();
             int cusPrice = Integer.parseInt(jLabel7.getText());
-            customizedProduct cusProd = new customizedProduct(cusStyle,cusSize, cusName,cusAcc,cusPrice, pickup);
-            CusProd.add(cusProd);
-            System.out.print(CusProd);      
+            customizedProduct cusProd = new customizedProduct(GenNewID(),cusStyle,cusSize, cusName,cusAcc,cusPrice, pickup);
+            CusProd.add(cusProd);  
             JOptionPane.showMessageDialog(this, "Order Confrim");
             jLabel7.setText("0");
             jLabel13.setText("0");
@@ -631,6 +651,7 @@ public class CustomizedFloral extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

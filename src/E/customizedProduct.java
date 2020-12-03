@@ -10,6 +10,7 @@ package E;
  * @author User
  */
 public class customizedProduct {
+    String newID;
     String selectedStyle;
     String selectedSize;
     String selectedFlower;
@@ -17,7 +18,8 @@ public class customizedProduct {
     int SumPrice;
     String pickup;
 
-    public customizedProduct(String selectedStyle, String selectedSize, String selectedFlower, String selectedAccessories, int SumPrice, String pickup){
+    public customizedProduct(String ID, String selectedStyle, String selectedSize, String selectedFlower, String selectedAccessories, int SumPrice, String pickup){
+        this.newID = ID;
         this.selectedStyle = selectedStyle;
         this.selectedSize = selectedSize;
         this.selectedFlower = selectedFlower;
@@ -28,7 +30,15 @@ public class customizedProduct {
 
     public customizedProduct(){
     }
-    
+
+    public String getNewID() {
+        return newID;
+    }
+
+    public void setNewID(String newID) {
+        this.newID = newID;
+    }
+
     public String getSelectedStyle() {
         return selectedStyle;
     }

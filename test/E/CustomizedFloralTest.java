@@ -17,13 +17,11 @@ import static org.junit.Assert.*;
 public class CustomizedFloralTest {
     
     customizedProduct cp = new customizedProduct();
-    customizedProduct cp2 = new customizedProduct();
     ArrayList<customizedProduct> cpList = new ArrayList<>();
     
     
     public CustomizedFloralTest() {
-        cp = new customizedProduct("asd","asd","Lily","asd",12,"asd");
-        cp2 = new customizedProduct("asd","asd","Rose","asd",12,"asd");
+        cp = new customizedProduct("CF001","asd","asd","Lily","asd",12,"asd");
     }
     
     @Before
@@ -67,8 +65,7 @@ public class CustomizedFloralTest {
     public void testMain() {
         System.out.println("main");
         cpList.add(cp);
-        cpList.add(cp2);
-        assertEquals("Lily",cpList.get(0).getSelectedFlower());
+        assertEquals("CF001",cpList.get(0).getNewID());
         String[] args= null;
         CustomizedFloral.main(args);
     }

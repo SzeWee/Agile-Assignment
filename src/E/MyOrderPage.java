@@ -22,8 +22,6 @@ public class MyOrderPage extends javax.swing.JFrame {
      */
     public MyOrderPage() {
         initComponents();
-        init();
-        refreshTable();
     }
     
     public MyOrderPage(ArrayList<customizedProduct> CusProd2, ArrayList<product> prod2,ArrayList<Accessories> Acc2){
@@ -35,7 +33,7 @@ public class MyOrderPage extends javax.swing.JFrame {
     }
 
     public void init(){
-        customizedProduct cus = new customizedProduct("asd","asd","Lily","asd",12,"asd");
+        customizedProduct cus = new customizedProduct("CF001","asd","asd","Lily","asd",12,"asd");
         CusProd.add(cus);
         
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -45,6 +43,7 @@ public class MyOrderPage extends javax.swing.JFrame {
             }
         for(int i=0; i < CusProd.size(); i++){
             model.addRow(new Object[]{ 
+                CusProd.get(i).getNewID(),
                 CusProd.get(i).getSelectedStyle(),
                 CusProd.get(i).getSelectedSize(),
                 CusProd.get(i).getSelectedFlower(),
@@ -63,6 +62,7 @@ public class MyOrderPage extends javax.swing.JFrame {
             }
             for(int i=0; i < CusProd.size(); i++){
             model.addRow(new Object[]{
+                CusProd.get(i).getNewID(),
                 CusProd.get(i).getSelectedStyle(),
                 CusProd.get(i).getSelectedSize(),
                 CusProd.get(i).getSelectedFlower(),
@@ -96,17 +96,17 @@ public class MyOrderPage extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Style", "Size", "Flower", "Accessories", "Price(RM)", "Delivery Status"
+                "ID", "Style", "Size", "Flower", "Accessories", "Price(RM)", "Delivery Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -121,6 +121,7 @@ public class MyOrderPage extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
         }
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -140,7 +141,7 @@ public class MyOrderPage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -157,7 +158,7 @@ public class MyOrderPage extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         pack();
