@@ -50,16 +50,21 @@ public class DeliveryOrder extends javax.swing.JFrame {
     
     public ArrayList listofOrder(){
         ArrayList<OrderInfo> list = new ArrayList<>();
-        OrderInfo oi1 = new OrderInfo("O00001","Colwin Yik","17/10/2020","24/10/2020","Credit-Card","No.1, Taman Satu 1 Jalan Satu 31330, Kuala Lumpur.","Delivered");
-        OrderInfo oi2 = new OrderInfo("O00002","Michael Lee","24/10/2020","27/10/2020","Debit-Card","K379, Taman Bunga 12, Jalan Tiga 45910, Ipoh Perak.","Delivered");
+        OrderInfo oi1 = new OrderInfo("O00001","Colwin Yik","17/10/2020","24/10/2020","Credit-Card","No.1, Taman Satu 1 Jalan Satu 31330, Kuala Lumpur.","Delivered Successful");
+        OrderInfo oi2 = new OrderInfo("O00002","Michael Lee","24/10/2020","27/10/2020","Debit-Card","K379, Taman Bunga 12, Jalan Tiga 45910, Ipoh Perak.","Delivered Successful");
         OrderInfo oi3 = new OrderInfo("O00003","John Cena","29/10/2020","02/11/2020","Credit-Card","Block C-11, Taman Mahatir 7, Jalan Badawi 55730, Shah Alam.","Delivering");
-        OrderInfo oi4 = new OrderInfo("O00004","James Bond","07/11/2020","10/11/2020","Debit-Card","No.3, Jalan Pasir Delima 7, Jalan Badawi 55730, Shah Alam.","Processing");
-        OrderInfo oi5 = new OrderInfo("O00005","Peter Chiu","13/11/2020","16/11/2020","Credit-Card","A113, Taman Selangor 7, Jalan Badawi 55730, Shah Alam.","Processing");
+        OrderInfo oi4 = new OrderInfo("O00004","James Bond","07/11/2020","10/11/2020","Debit-Card","No.3, Jalan Pasir Delima 7, Jalan Badawi 55730, Shah Alam.","Pending Delivery-man");
+        OrderInfo oi5 = new OrderInfo("O00005","Peter Chiu","13/11/2020","16/11/2020","Credit-Card","A113, Taman Selangor 7, Jalan Badawi 55730, Shah Alam.","Waiting");
         list.add(oi1);
         list.add(oi2);
         list.add(oi3);
         list.add(oi4);
         list.add(oi5);
+        return list;
+    }
+    
+    public ArrayList listofOrder1(){
+        ArrayList<OrderInfo> list = new ArrayList<>();
         return list;
     }
 
@@ -236,4 +241,8 @@ public class DeliveryOrder extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    ArrayList<OrderInfo> listofOrder(String factories) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
