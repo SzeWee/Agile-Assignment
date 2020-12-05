@@ -45,7 +45,7 @@ public class CatalogOrdersFormTest {
         double expResult = 44.00;
         double result = TotalPrice;
         assertEquals(expResult, result, 0.00);
-       
+
     }
 
     /**
@@ -57,7 +57,25 @@ public class CatalogOrdersFormTest {
         System.out.println("main");
         String[] args = null;
         CatalogOrdersForm.main(args);
+ArrayList<String> orderData = new ArrayList<>();
+        String selectionComboBox = "Rose";
+        String txtQuantity = "20";
+        String lblUnitPrice = "12.00";
+        double price2= 20 * 12;
+        String Price = String.format("%.2f", (price2));
         
+        
+        orderData.add(selectionComboBox);
+        orderData.add(txtQuantity);
+        orderData.add(lblUnitPrice);
+        orderData.add(Price);
+        
+        String Data = "";
+        for (int j = 0; j < orderData.size(); j++) {
+            Data= orderData.toString();
+        }
+        String expResult = "[Rose, 20, 12.00, 240.00]";
+    assertEquals(expResult,Data);
     }
 
 }
