@@ -11,6 +11,7 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
     public CatalogOrdersForm() {
         initComponents();
     }
+
     ArrayList<Double> priceArray = new ArrayList<>();
 
     public double calTotalPrice(double Price) {
@@ -43,15 +44,9 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
         tblMyOrder = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         lblTotalPrice = new javax.swing.JLabel();
+        btnConfirm = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        txtStreet = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        txtCity = new javax.swing.JTextField();
-        txtPostcode = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        btnAddress = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        txtState = new javax.swing.JTextField();
+        lblOrderID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Catalog Order");
@@ -126,30 +121,17 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
         lblTotalPrice.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblTotalPrice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        btnConfirm.setText("Confirm Order");
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmActionPerformed(evt);
+            }
+        });
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("City :");
+        jLabel7.setText("OrderID :");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Street :");
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Postcode :");
-
-        btnAddress.setText("Confirm Address");
-        btnAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddressActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("State :");
-
-        txtState.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStateActionPerformed(evt);
-            }
-        });
+        lblOrderID.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,47 +144,41 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnConfirm))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtQuantity))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(selectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblUnitPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnAddOrder))))
-                                .addGap(56, 56, 56)
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtStreet)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(txtPostcode, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(btnAddress, javax.swing.GroupLayout.Alignment.LEADING))
-                                            .addComponent(txtCity)
-                                            .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel5)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(txtQuantity))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel6)
+                                                    .addGap(14, 14, 14))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jLabel7)
+                                                        .addComponent(jLabel4))
+                                                    .addGap(18, 18, 18)))
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(selectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lblUnitPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnAddOrder)
+                                                .addComponent(lblOrderID, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jLabel2)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -210,43 +186,25 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(selectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblUnitPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAddOrder))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtStreet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addGap(16, 16, 16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7))
-                                .addGap(39, 39, 39))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel9)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAddress)))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(lblOrderID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUnitPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(btnAddOrder)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,7 +212,9 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(lblTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnConfirm)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -270,19 +230,28 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
         double SunflowerPrice = 7.00;
         double OrchidPrice = 10.00;
         double DaisyPrice = 4.00;
-        if (selectionComboBox.getSelectedIndex() == 0) {
-            lblUnitPrice.setText("" + RosePrice);
-        } else if (selectionComboBox.getSelectedIndex() == 1) {
-            lblUnitPrice.setText("" + TulipPrice);
-        } else if (selectionComboBox.getSelectedIndex() == 2) {
-            lblUnitPrice.setText("" + SunflowerPrice);
-        } else if (selectionComboBox.getSelectedIndex() == 3) {
-            lblUnitPrice.setText("" + OrchidPrice);
-        } else if (selectionComboBox.getSelectedIndex() == 4) {
-            lblUnitPrice.setText("" + DaisyPrice);
+
+        switch (selectionComboBox.getSelectedIndex()) {
+            case 0:
+                lblUnitPrice.setText("" + String.format("%.2f", RosePrice));
+                break;
+            case 1:
+                lblUnitPrice.setText("" + String.format("%.2f", TulipPrice));
+                break;
+            case 2:
+                lblUnitPrice.setText("" + String.format("%.2f", SunflowerPrice));
+                break;
+            case 3:
+                lblUnitPrice.setText("" + String.format("%.2f", OrchidPrice));
+                break;
+            case 4:
+                lblUnitPrice.setText("" + String.format("%.2f", DaisyPrice));
+                break;
+            default:
+                break;
         }
     }//GEN-LAST:event_selectionComboBoxActionPerformed
-
+    public static double itemcount1 = 0;
     private void btnAddOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddOrderActionPerformed
         int qtySelected;
 
@@ -304,11 +273,24 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
                 double Price = qtySelected * parseDouble(lblUnitPrice.getText());
 
                 //store entered data into String array
-                String orderData[] = {selectionComboBox.getSelectedItem().toString(), txtQuantity.getText(), lblUnitPrice.getText(), String.valueOf(Price)};
+                String orderData[] = {selectionComboBox.getSelectedItem().toString(), txtQuantity.getText(), lblUnitPrice.getText(), String.format("%.2f", Price)};
 
+                boolean isDuplicated = false;
                 DefaultTableModel tblModel = (DefaultTableModel) tblMyOrder.getModel();
-
-                tblModel.addRow(orderData);//row added
+                for (int i = 0; i < tblModel.getRowCount(); i++) {                      //check for each row in the table model
+                    if (tblModel.getValueAt(i, 0).toString().equals(selectionComboBox.getSelectedItem().toString())) {   //if the value of the first column(item name) is same with the current order item added in...
+                        isDuplicated = true;
+                        int tempoQuantity = Integer.parseInt(tblModel.getValueAt(i, 1).toString()) + Integer.parseInt(txtQuantity.getText()); //take the value of the second column(old item quantity) add with the current new entered order item quantity
+                        double tempoUnitPrice = Double.parseDouble(tblModel.getValueAt(i, 2).toString());   //take the value of the third column(old item unit price) ,no need take current one cause this is fixed
+                        double tempoItemTotalPrice = Double.parseDouble(tblModel.getValueAt(i, 3).toString()) + Price;  //take the value of the forth column(old item total price) add with the current newly entered item total price
+                        String tempoOrderData[] = {selectionComboBox.getSelectedItem().toString(), String.valueOf(tempoQuantity), String.valueOf(tempoUnitPrice), String.format("%.2f", tempoItemTotalPrice)}; //initalise a new array to put updated row of data
+                        tblModel.removeRow(i); //delete the old row of data
+                        tblModel.addRow(tempoOrderData); //add updated row of data into tabel model
+                    }
+                }
+                if (!isDuplicated) {
+                    tblModel.addRow(orderData);//row added
+                }
 
                 JOptionPane.showMessageDialog(this, "Order is added.");
 
@@ -316,109 +298,61 @@ public class CatalogOrdersForm extends javax.swing.JFrame {
                 txtQuantity.setText("");
 
                 double FinalTotalPrice = (calTotalPrice(Price));
-                lblTotalPrice.setText(String.valueOf(FinalTotalPrice));
+                lblTotalPrice.setText(String.format("%.2f", FinalTotalPrice));
 
+                itemcount1 = itemcount1 + 1;
             }
         }
 
 
     }//GEN-LAST:event_btnAddOrderActionPerformed
 
-    private void txtStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStateActionPerformed
+    String OrderID2;
 
-ArrayList<String> Address = new ArrayList<>();
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        if (itemcount1 != 0) {
+            OrderID2 = String.valueOf(generateOrderID());
+            new Address(OrderID2).setVisible(true);
 
-    private void btnAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddressActionPerformed
-        String street;
-        String city;
-        int postcode;
-        String state;
+            lblOrderID.setText(OrderID2);
 
-        try {
-            postcode = Integer.parseInt(this.txtPostcode.getText());
+        } else {
+            CatalogOrdersForm lframe = new CatalogOrdersForm();
+            JOptionPane.showMessageDialog(this, "No order detected", "Error", JOptionPane.ERROR_MESSAGE);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Enter a correct postcode", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
         }
-
-        if (txtPostcode.getText().length() > 5 || txtPostcode.getText().length() < 5) {
-            JOptionPane.showMessageDialog(this, "Enter a 5-digit postcode", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (postcode <= 0) {
-            JOptionPane.showMessageDialog(this, "Enter a correct postcode", "Error", JOptionPane.ERROR_MESSAGE);
-        } else if (txtPostcode.getText().equals("")||txtStreet.getText().equals("")||txtCity.getText().equals("")||txtState.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Please fill in all the address details", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
-         street = txtStreet.getText();
-         city = txtCity.getText();
-         state = txtState.getText();
-         
-         Address.add(street);
-         Address.add(city);
-         Address.add(String.valueOf(postcode));
-         Address.add(state);
-         
-        JOptionPane.showMessageDialog(this, "Address is confirmed.");
-        
-        }
-    }//GEN-LAST:event_btnAddressActionPerformed
+    }//GEN-LAST:event_btnConfirmActionPerformed
+    public int generateOrderID() {
+        int orderID1 = (int) (Math.random() * (9999 - 1000 + 1) + 1000);
+        return orderID1;
+    }
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CatalogOrdersForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CatalogOrdersForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CatalogOrdersForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CatalogOrdersForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CatalogOrdersForm().setVisible(true);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddOrder;
-    private javax.swing.JButton btnAddress;
+    private javax.swing.JButton btnConfirm;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblOrderID;
     private javax.swing.JLabel lblTotalPrice;
     private javax.swing.JLabel lblUnitPrice;
     private javax.swing.JComboBox<String> selectionComboBox;
     private javax.swing.JTable tblMyOrder;
-    private javax.swing.JTextField txtCity;
-    private javax.swing.JTextField txtPostcode;
     private javax.swing.JTextField txtQuantity;
-    private javax.swing.JTextField txtState;
-    private javax.swing.JTextField txtStreet;
     // End of variables declaration//GEN-END:variables
 }
