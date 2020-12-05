@@ -21,6 +21,7 @@ public class Address extends javax.swing.JFrame {
 
         initComponents();
         this.lblOrderID2.setText(OrderID);
+        this.jLabel2.setText("OrderID :");
     }
 
     /**
