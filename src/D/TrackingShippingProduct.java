@@ -18,57 +18,32 @@ import javax.swing.JScrollPane;
  *
  * @author MSI
  */
-public class ProductPurchasing extends javax.swing.JFrame {
+public class TrackingShippingProduct extends javax.swing.JFrame {
 
     /**
      * Creates new form ProductPurchasing
      */
-    public ProductPurchasing() {
+    
+    private DeliveryOrder number;
+    
+    public TrackingShippingProduct() {
         initComponents();
         addRowToJTable();
     }
-    //aa
-        public class ProductPurchase{
-        public int id;
-        public String purchaseDate;
-        public String paymentType;
-        public String purchaseType;
-        public String productStatus;
+    
+    public void addRowToJTable(){
         
-        public ProductPurchase(int id, String purchaseDate, String paymentType, String purchaseType, String productStatus){
-            this.id = id;
-            this.purchaseDate = purchaseDate;
-            this.paymentType = paymentType;
-            this.purchaseType = purchaseType;
-            this.productStatus = productStatus;
-        }
-    }
+        number = new DeliveryOrder();
+        ArrayList<OrderInfo> list = number.listofOrder();
         
-        public ArrayList ListProductPurchase(){
-        ArrayList<ProductPurchase> list = new ArrayList<ProductPurchase>();
-        ProductPurchase pp1 = new ProductPurchase(0001,"14/10/2020","Credit-Card","Delivery","Delivered");
-        ProductPurchase pp2 = new ProductPurchase(0002,"18/10/2020","Debit-Card","Delivery","Delivered");
-        ProductPurchase pp3 = new ProductPurchase(0003,"21/10/2020","Debit-Card","Delivery","Dispatching from Warehouse");
-        ProductPurchase pp4 = new ProductPurchase(0004,"01/11/2020","On-Cash","Pickup","Pending");
-        ProductPurchase pp5 = new ProductPurchase(0005,"12/11/2020","On-Cash","Pickup","Processing");
-        list.add(pp1);
-        list.add(pp2);
-        list.add(pp3);
-        list.add(pp4);
-        list.add(pp5);
-        return list;
-    }
-        
-        public void addRowToJTable(){
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        ArrayList<ProductPurchase> list = ListProductPurchase();
-        Object rowData[] = new Object[5];
+        Object rowData[] = new Object[10];
+        jTable1.setRowHeight(40);
         for(int i=0; i<list.size(); i++){
-            rowData[0] = list.get(i).id;
-            rowData[1] = list.get(i).purchaseDate;
-            rowData[2] = list.get(i).paymentType;
-            rowData[3] = list.get(i).purchaseType;
-            rowData[4] = list.get(i).productStatus;
+            rowData[0] = list.get(i).orderID;
+            rowData[1] = list.get(i).customerAddress;
+            rowData[2] = list.get(i).shippingDate;
+            rowData[3] = list.get(i).productStatus;
             model.addRow(rowData);
         }
     }
@@ -97,38 +72,43 @@ public class ProductPurchasing extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product Purchase ID", "Purchase Date", "Payment Type", "Purchase Type", "Payment Status"
+                "Order ID", "Shipping Address", "Shipping Date", "Product Status"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Product Purchasing");
+        jLabel1.setText("Tracking Shipping Product");
 
         jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(40, 40, 40)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(278, 278, 278)
-                            .addComponent(jLabel1))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(258, 258, 258)
+                        .addComponent(jLabel1)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jLabel1)
                 .addGap(37, 37, 37)
+                .addComponent(jLabel1)
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jButton1)
@@ -137,6 +117,16 @@ public class ProductPurchasing extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:a
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Customer().setVisible(true);
+            }
+        });
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,20 +145,21 @@ public class ProductPurchasing extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProductPurchasing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrackingShippingProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProductPurchasing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrackingShippingProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProductPurchasing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrackingShippingProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProductPurchasing.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrackingShippingProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProductPurchasing().setVisible(true);
+                new TrackingShippingProduct().setVisible(true);
             }
         });
     }
